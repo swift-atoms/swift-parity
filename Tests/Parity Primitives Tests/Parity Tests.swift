@@ -1,5 +1,3 @@
-// Parity Tests.swift
-
 import Pair_Primitives
 import Parity_Primitives_Test_Support
 import Testing
@@ -10,8 +8,6 @@ struct `Parity Tests` {
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
 }
-
-// MARK: - Unit
 
 extension `Parity Tests`.Unit {
 
