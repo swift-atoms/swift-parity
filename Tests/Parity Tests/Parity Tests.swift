@@ -1,5 +1,5 @@
-import Pair_Primitives
-import Parity_Primitives_Test_Support
+import Pair
+import Parity_Test_Support
 import Testing
 
 @Suite
@@ -12,7 +12,7 @@ struct `Parity Tests` {
 extension `Parity Tests`.Unit {
 
     @Test
-    func `Parity Value typealias resolves through Pair_Primitives`() {
+    func `Parity Value typealias resolves through Pair`() {
         let value: Parity.Value<Int> = Pair(.even, 4)
         #expect(value.first == .even)
         #expect(value.second == 4)
