@@ -16,14 +16,10 @@ let package = Package(
             name: "Parity",
             targets: ["Parity"]
         ),
-        .library(
-            name: "Parity Test Support",
-            targets: ["Parity Test Support"]
-        ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-pair.git",
+            url: "https://github.com/swift-atoms/swift-pair.git",
             branch: "main"
         )
     ],
@@ -34,18 +30,10 @@ let package = Package(
                 .product(name: "Pair", package: "swift-pair")
             ]
         ),
-        .target(
-            name: "Parity Test Support",
-            dependencies: [
-                "Parity"
-            ],
-            path: "Tests/Support"
-        ),
         .testTarget(
             name: "Parity Tests",
             dependencies: [
-                "Parity",
-                "Parity Test Support",
+                .target(name: "Parity"),
             ]
         ),
     ],

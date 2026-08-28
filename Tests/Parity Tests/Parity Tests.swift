@@ -1,5 +1,5 @@
 import Pair
-import Parity_Test_Support
+import Parity
 import Testing
 
 @Suite

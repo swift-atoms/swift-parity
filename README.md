@@ -50,7 +50,7 @@ print(tagged.second)   // 4
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-molecules/swift-parity.git", branch: "main")
+    .package(url: "https://github.com/swift-atoms/swift-parity.git", branch: "main")
 ]
 ```
 
@@ -72,7 +72,6 @@ Two library products. Depends only on the `Pair` primitive, which it re-exports.
 | Product | Target | Purpose |
 |---------|--------|---------|
 | `Parity` | `Sources/Parity/` | The `Parity` enum (`.even` / `.odd`), its `BinaryInteger` classification init, the Z₂ `adding` / `multiplying` / `opposite` algebra and prefix `!`, and the `Parity.Value<Payload>` pairing typealias. Re-exports `Pair`. |
-| `Parity Test Support` | `Tests/Support/` | Re-exports the main target for test consumers. |
 
 Foundation-free.
 
