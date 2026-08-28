@@ -1,4 +1,4 @@
-# Parity Primitives
+# Parity
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -11,7 +11,7 @@
 `Parity` is the equivalence class of an integer under modulo 2: `.even` or `.odd`. Rather than recomputing `value % 2` at every site and threading a bare `Bool` whose meaning is ambiguous, you capture the classification once in a named type that knows its own algebra — addition (even + even = even, odd + odd = even) and multiplication (odd × odd = odd, else even) — so parity-tracking algorithms read in the vocabulary of the mathematics.
 
 ```swift
-import Parity_Primitives
+import Parity
 
 // Classify integers.
 let a = Parity(42)   // even
@@ -35,8 +35,8 @@ print(!b)                 // even
 To carry a payload alongside its parity, `Parity.Value` pairs the two:
 
 ```swift
-import Pair_Primitives
-import Parity_Primitives
+import Pair
+import Parity
 
 // Parity.Value<Payload> is Pair<Parity, Payload>.
 let tagged: Parity.Value<Int> = Pair(.even, 4)
@@ -50,7 +50,7 @@ print(tagged.second)   // 4
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-parity-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-atoms/swift-parity.git", branch: "main")
 ]
 ```
 
@@ -58,7 +58,7 @@ dependencies: [
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Parity Primitives", package: "swift-parity-primitives"),
+        .product(name: "Parity", package: "swift-parity"),
     ]
 )
 ```
@@ -71,8 +71,7 @@ Two library products. Depends only on the `Pair` primitive, which it re-exports.
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `Parity Primitives` | `Sources/Parity Primitives/` | The `Parity` enum (`.even` / `.odd`), its `BinaryInteger` classification init, the Z₂ `adding` / `multiplying` / `opposite` algebra and prefix `!`, and the `Parity.Value<Payload>` pairing typealias. Re-exports `Pair Primitives`. |
-| `Parity Primitives Test Support` | `Tests/Support/` | Re-exports the main target for test consumers. |
+| `Parity` | `Sources/Parity/` | The `Parity` enum (`.even` / `.odd`), its `BinaryInteger` classification init, the Z₂ `adding` / `multiplying` / `opposite` algebra and prefix `!`, and the `Parity.Value<Payload>` pairing typealias. Re-exports `Pair`. |
 
 Foundation-free.
 

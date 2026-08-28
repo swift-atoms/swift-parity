@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-parity-primitives",
+    name: "swift-parity",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -13,39 +13,27 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Parity Primitives",
-            targets: ["Parity Primitives"]
-        ),
-        .library(
-            name: "Parity Primitives Test Support",
-            targets: ["Parity Primitives Test Support"]
+            name: "Parity",
+            targets: ["Parity"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-pair-primitives.git",
+            url: "https://github.com/swift-atoms/swift-pair.git",
             branch: "main"
         )
     ],
     targets: [
         .target(
-            name: "Parity Primitives",
+            name: "Parity",
             dependencies: [
-                .product(name: "Pair Primitives", package: "swift-pair-primitives")
+                .product(name: "Pair", package: "swift-pair")
             ]
         ),
-        .target(
-            name: "Parity Primitives Test Support",
-            dependencies: [
-                "Parity Primitives"
-            ],
-            path: "Tests/Support"
-        ),
         .testTarget(
-            name: "Parity Primitives Tests",
+            name: "Parity Tests",
             dependencies: [
-                "Parity Primitives",
-                "Parity Primitives Test Support",
+                .target(name: "Parity"),
             ]
         ),
     ],
