@@ -17,34 +17,36 @@ let package = Package(
             targets: ["Parity"]
         ),
         .library(
-            name: "Parity Standard Library Integration",
-            targets: ["Parity Standard Library Integration"]
-        ),
-        .library(
-            name: "Parity Apple Foundation Integration",
-            targets: ["Parity Apple Foundation Integration"]
+            name: "Parity Test Support",
+            targets: ["Parity Test Support"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(
+            url: "https://github.com/swift-molecules/swift-pair.git",
+            branch: "main"
+        )
+    ],
     targets: [
         .target(
             name: "Parity",
-            dependencies: []
-        ),
-        .target(
-            name: "Parity Standard Library Integration",
-            dependencies: ["Parity"]
-        ),
-        .target(
-            name: "Parity Apple Foundation Integration",
             dependencies: [
-                "Parity",
-                "Parity Standard Library Integration",
+                .product(name: "Pair", package: "swift-pair")
             ]
+        ),
+        .target(
+            name: "Parity Test Support",
+            dependencies: [
+                "Parity"
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "Parity Tests",
-            dependencies: ["Parity"]
+            dependencies: [
+                "Parity",
+                "Parity Test Support",
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

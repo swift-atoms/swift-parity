@@ -1,4 +1,6 @@
-public enum Parity: Sendable, Hashable {
+public import Pair
+
+public enum Parity: Sendable, Hashable, CaseIterable {
 
     case even
 
@@ -54,3 +56,20 @@ extension Parity {
         Self.multiplying(self, other)
     }
 }
+
+extension Parity {
+
+    @inlinable
+    public init<T: BinaryInteger>(_ value: T) {
+        self = value.isMultiple(of: 2) ? .even : .odd
+    }
+}
+
+extension Parity {
+
+    public typealias Value<Payload> = Pair<Parity, Payload>
+}
+
+#if !hasFeature(Embedded)
+    extension Parity: Codable {}
+#endif
