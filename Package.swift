@@ -12,10 +12,10 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        .library(
-            name: "Parity",
-            targets: ["Parity"]
-        ),
+        .library(name: "Parity", targets: ["Parity"]),
+        .library(name: "Parity Standard Library Integration", targets: ["Parity Standard Library Integration"]),
+        .library(name: "Parity Foundation Library Integration", targets: ["Parity Foundation Library Integration"]),
+        .library(name: "Parity Test Support", targets: ["Parity Test Support"]),
     ],
     dependencies: [
         .package(
@@ -27,21 +27,48 @@ let package = Package(
         .target(
             name: "Parity",
             dependencies: [
-                .product(name: "Pair", package: "swift-pair")
-            ]
+                .product(name: "Pair", package: "swift-pair"),
+            ],
+            path: "Sources/Parity"
+        ),
+        .target(
+            name: "Parity Standard Library Integration",
+            dependencies: [
+                .target(name: "Parity"),
+            ],
+            path: "Sources/Parity Standard Library Integration"
+        ),
+        .target(
+            name: "Parity Foundation Library Integration",
+            dependencies: [
+                .target(name: "Parity"),
+                .target(name: "Parity Standard Library Integration"),
+            ],
+            path: "Sources/Parity Foundation Library Integration"
+        ),
+        .target(
+            name: "Parity Test Support",
+            dependencies: [
+                .target(name: "Parity"),
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "Parity Tests",
             dependencies: [
                 .target(name: "Parity"),
-            ]
+                .target(name: "Parity Test Support"),
+                .target(name: "Parity Standard Library Integration"),
+                .target(name: "Parity Foundation Library Integration"),
+            ],
+            path: "Tests/Parity Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -50,8 +77,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }
