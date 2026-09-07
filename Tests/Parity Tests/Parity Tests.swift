@@ -3,13 +3,13 @@ import Parity
 import Testing
 
 @Suite
-struct `Parity Tests` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
+struct `Parity values resolve through pairs` {
+    @Suite struct `Parity values resolve through pairs in their public representations` {}
+    @Suite struct `No additional parity edge cases are defined` {}
+    @Suite struct `No additional parity integration cases are defined` {}
 }
 
-extension `Parity Tests`.Unit {
+extension `Parity values resolve through pairs`.`Parity values resolve through pairs in their public representations` {
 
     @Test
     func `Parity Value typealias resolves through Pair`() {
