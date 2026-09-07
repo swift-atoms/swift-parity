@@ -71,5 +71,5 @@ extension Parity {
 }
 
 #if !hasFeature(Embedded)
-    extension Parity: Codable {}
+extension Parity: Swift.Codable {}
 #endif

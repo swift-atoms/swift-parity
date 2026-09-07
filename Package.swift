@@ -13,8 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Parity", targets: ["Parity"]),
-        .library(name: "Parity Standard Library Integration", targets: ["Parity Standard Library Integration"]),
-        .library(name: "Parity Foundation Library Integration", targets: ["Parity Foundation Library Integration"]),
+
+        .library(name: "Parity Foundation Integration", targets: ["Parity Foundation Integration"]),
         .library(name: "Parity Test Support", targets: ["Parity Test Support"]),
     ],
     dependencies: [
@@ -31,20 +31,13 @@ let package = Package(
             ],
             path: "Sources/Parity"
         ),
+        
         .target(
-            name: "Parity Standard Library Integration",
+            name: "Parity Foundation Integration",
             dependencies: [
                 .target(name: "Parity"),
             ],
-            path: "Sources/Parity Standard Library Integration"
-        ),
-        .target(
-            name: "Parity Foundation Library Integration",
-            dependencies: [
-                .target(name: "Parity"),
-                .target(name: "Parity Standard Library Integration"),
-            ],
-            path: "Sources/Parity Foundation Library Integration"
+            path: "Sources/Parity Foundation Integration"
         ),
         .target(
             name: "Parity Test Support",
@@ -58,8 +51,7 @@ let package = Package(
             dependencies: [
                 .target(name: "Parity"),
                 .target(name: "Parity Test Support"),
-                .target(name: "Parity Standard Library Integration"),
-                .target(name: "Parity Foundation Library Integration"),
+                .target(name: "Parity Foundation Integration"),
             ],
             path: "Tests/Parity Tests"
         ),
