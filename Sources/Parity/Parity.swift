@@ -67,7 +67,7 @@ extension Parity {
 
 extension Parity {
 
-    public typealias Value<Payload> = Pair<Parity, Payload>
+    public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Parity, Payload>
 }
 
 #if !hasFeature(Embedded)
