@@ -28,7 +28,7 @@ let package = Package(
             url: "https://github.com/swift-atoms/swift-pair.git",
             branch: "main"
         ),
-        .package(url: "https://github.com/swift-atoms/swift-finite.git", branch: "main", traits: [.trait(name: "Algebra", condition: .when(traits: ["Finite"]))]),
+        .package(url: "https://github.com/swift-atoms/swift-finite.git", branch: "main", traits: [.trait(name: "Algebra", condition: .when(traits: ["Finite", "Tagged"]))]),
         .package(url: "https://github.com/swift-atoms/swift-cardinal.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-ordinal.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-index.git", branch: "main"),
