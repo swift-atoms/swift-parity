@@ -1,6 +1,6 @@
 #if Algebra
 public import Algebra
-public import Optic
+import Optic
 
 extension Algebra.Group where Element == Parity {
 
