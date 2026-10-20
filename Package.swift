@@ -28,10 +28,14 @@ let package = Package(
             url: "https://github.com/swift-atoms/swift-pair.git",
             branch: "main"
         ),
-        .package(url: "https://github.com/swift-atoms/swift-finite.git", branch: "main", traits: [
-            .trait(name: "Algebra", condition: .when(traits: ["Finite"])),
-            .trait(name: "Tagged", condition: .when(traits: ["Finite"])),
-        ]),
+        .package(
+            url: "https://github.com/swift-atoms/swift-finite.git",
+            branch: "main",
+            traits: [
+                .trait(name: "Algebra", condition: .when(traits: ["Finite"])),
+                .trait(name: "Tagged", condition: .when(traits: ["Finite"])),
+            ]
+        ),
         .package(url: "https://github.com/swift-atoms/swift-cardinal.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-ordinal.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-index.git", branch: "main"),
@@ -66,14 +70,14 @@ let package = Package(
         .target(
             name: "Parity Foundation Integration",
             dependencies: [
-                .target(name: "Parity"),
+                .target(name: "Parity")
             ],
             path: "Sources/Parity Foundation Integration"
         ),
         .target(
             name: "Parity Test Support",
             dependencies: [
-                .target(name: "Parity"),
+                .target(name: "Parity")
             ],
             path: "Tests/Support"
         ),
@@ -85,26 +89,31 @@ let package = Package(
             ],
             path: "Tests/Parity Tests"
         ),
-        .testTarget(name: "Parity Finite Algebra Migration Tests", dependencies: [
-            .target(name: "Parity"),
-            .product(name: "Finite", package: "swift-finite", condition: .when(traits: ["Finite"])),
-            .product(name: "Algebra", package: "swift-algebra", condition: .when(traits: ["Finite"])),
-            .product(name: "Cardinal", package: "swift-cardinal", condition: .when(traits: ["Finite"])),
-            .product(name: "Ordinal", package: "swift-ordinal", condition: .when(traits: ["Finite"])),
-        ], path: "Tests/Parity Finite Algebra Migration Tests"),
+        .testTarget(
+            name: "Parity Finite Algebra Migration Tests",
+            dependencies: [
+                .target(name: "Parity"),
+                .product(name: "Finite", package: "swift-finite", condition: .when(traits: ["Finite"])),
+                .product(name: "Algebra", package: "swift-algebra", condition: .when(traits: ["Finite"])),
+                .product(name: "Cardinal", package: "swift-cardinal", condition: .when(traits: ["Finite"])),
+                .product(name: "Ordinal", package: "swift-ordinal", condition: .when(traits: ["Finite"])),
+            ],
+            path: "Tests/Parity Finite Algebra Migration Tests"
+        ),
     ],
     swiftLanguageModes: [.v6]
 )
 
 for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    target.swiftSettings = (target.swiftSettings ?? []) + [
-        .strictMemorySafety(),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility"),
-        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableUpcomingFeature("InferIsolatedConformances"),
-        .enableExperimentalFeature("Lifetimes"),
-        .treatAllWarnings(as: .error),
-    ]
+    target.swiftSettings =
+        (target.swiftSettings ?? []) + [
+            .strictMemorySafety(),
+            .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("InternalImportsByDefault"),
+            .enableUpcomingFeature("MemberImportVisibility"),
+            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+            .enableUpcomingFeature("InferIsolatedConformances"),
+            .enableExperimentalFeature("Lifetimes"),
+            .treatAllWarnings(as: .error),
+        ]
 }

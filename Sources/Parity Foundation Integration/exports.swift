@@ -1,2 +1,2 @@
-@_exported public import Parity
 import Foundation
+@_exported public import Parity
